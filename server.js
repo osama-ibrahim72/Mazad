@@ -14,6 +14,8 @@ const dbConnection = require('./config/database');
 
 //routes
 const authRoute = require('./routes/authRoute');
+const categoriesRoute = require('./routes/categoryRoute');
+const carBrandRoute = require('./routes/carBrandRoute');
 
 
 
@@ -36,6 +38,8 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount Routes
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/categories', categoriesRoute);
+app.use('/api/v1/carBrands', carBrandRoute);
 
 
 
