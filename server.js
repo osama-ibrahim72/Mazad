@@ -15,7 +15,11 @@ const dbConnection = require('./config/database');
 //routes
 const authRoute = require('./routes/authRoute');
 const categoriesRoute = require('./routes/categoryRoute');
+const subCategoriesRoute = require('./routes/subCategoryRoute');
 const carBrandRoute = require('./routes/carBrandRoute');
+const shapeRoute = require('./routes/shapeRoute');
+const mazadRoute = require('./routes/mazadRoute');
+
 
 
 
@@ -39,11 +43,10 @@ if (process.env.NODE_ENV === 'development') {
 // Mount Routes
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/categories', categoriesRoute);
+app.use('/api/v1/subCategories', subCategoriesRoute);
 app.use('/api/v1/carBrands', carBrandRoute);
-
-
-
-
+app.use('/api/v1/shapes', shapeRoute);
+app.use('/api/v1/mazad', mazadRoute);
 
 
 
