@@ -5,46 +5,25 @@ const appControllerSchema = new mongoose.Schema(
     commission :{
       type: Number,
     },
-    depositAuctionSeller:{
+    depositMazad:{
       type: Number,
     },
-    depositAuctionUser:{
+    depositCarMazad:{
       type: Number,
     },
     pointValue:{
       type: Number,
     },
-    termsUser :{
+    terms :{
       type:String,
     },
-    termsSeller :{
+    privacy :{
       type:String,
-    },
-    privacyUser :{
-      type:String,
-    },
-    privacySeller :{
-      type : String,
     },
     git :{
       type : Number,
       default : 75, 
     },
-    vat :{
-      type : Number,
-    },
-    zeka :{
-      type : Number,
-    },
-    companyAddress:{
-      type: String,
-    },
-    companyRegisterNumber:{
-      type: Number,
-    }
-
-    
-    
   },
   { timestamps: true }
 );
