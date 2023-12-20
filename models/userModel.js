@@ -41,10 +41,12 @@ const userSchema = new mongoose.Schema(
       default : 0,
     },
     area :{
-      type :String,
+      type: mongoose.Schema.ObjectId,
+      ref : 'Area',
     },
     city:{
-      type :String,
+      type: mongoose.Schema.ObjectId,
+      ref : 'City',
     }
   },
   { timestamps: true }

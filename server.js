@@ -19,6 +19,10 @@ const subCategoriesRoute = require('./routes/subCategoryRoute');
 const carBrandRoute = require('./routes/carBrandRoute');
 const shapeRoute = require('./routes/shapeRoute');
 const mazadRoute = require('./routes/mazadRoute');
+const areaRoute = require('./routes/areaRoute');
+const cityRoute = require('./routes/cityRoute');
+
+
 
 
 
@@ -47,6 +51,9 @@ app.use('/api/v1/subCategories', subCategoriesRoute);
 app.use('/api/v1/carBrands', carBrandRoute);
 app.use('/api/v1/shapes', shapeRoute);
 app.use('/api/v1/mazad', mazadRoute);
+app.use('/api/v1/area', areaRoute);
+app.use('/api/v1/city', cityRoute);
+
 
 
 
