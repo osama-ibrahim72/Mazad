@@ -29,7 +29,7 @@ router.post('/forgotPassword', forgotPassword);
 router.post('/verifyResetCode', verifyPassResetCode);
 router.put('/resetPassword', resetPassword);
 router.put('/changePassword', changePassword);
-router.get('/protect', protect);
+router.put('/protect', protect);
 
 
 
