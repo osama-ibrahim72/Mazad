@@ -11,14 +11,10 @@ const {
   getController,
   addControllers,
   updateControllers,
-  getTermsUser,
-  updateTermsUser,
-  getPrivacySeller,
-  getPrivacyUser,
-  getTermsSeller,
-  updatePrivacySeller,
-  updatePrivacyUser,
-  updateTermsSeller,
+  getTerms,
+  updateTerms,
+  getPrivacy,
+  updatePrivacy,
   
 } = require('../services/appControllerService');
 
@@ -34,7 +30,7 @@ router
   .put( updateControllers);
 
 
-router.route('/terms').get(getTermsUser).put(updateTermsUser);
-router.route('/privacy').get(getPrivacyUser).put(updatePrivacyUser);
+router.route('/terms').get(getTerms).put(updateTerms);
+router.route('/privacy').get(getPrivacy).put(updatePrivacy);
 
 module.exports = router;
