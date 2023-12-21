@@ -212,12 +212,27 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.changePassword = asyncHandler (async (req,res)=>{
-  const user = await User.findById( req.body.id);
+ // 1) Check if token exist, if exist get
+ let token = req.body.token; 
+
+ // 2) Verify token (no change happens, expired token)
+ const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+ // 3) Check if user exists
+ const currentUser = await User.findById(decoded.userId);
+ if (!currentUser) {
+   return next(
+     new ApiError(
+       'The user that belong to this token does no longer exist',
+       401
+     )
+   );
+ } 
   const newPassword = req.body.newPassword;
   const newPasswordConfirm = req.body.newPasswordConfirm;
-  if (await bcrypt.compare(req.body.oldPassword , user.password)&& newPassword == newPasswordConfirm) {
-    user.password = newPassword;
-    await user.save();
+  if (await bcrypt.compare(req.body.oldPassword , currentUser.password)&& newPassword == newPasswordConfirm) {
+    currentUser.password = newPassword;
+    await currentUser.save();
     res.status(200).json({});
   }
   else 
