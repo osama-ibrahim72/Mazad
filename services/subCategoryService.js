@@ -31,3 +31,12 @@ exports.updateSubCategory = factory.updateOne(SubCategory);
 // @access  Private
 exports.deleteSubCategory = factory.deleteOne(SubCategory);
 
+
+
+exports.getSubByCat = asyncHandler(async (req,res) => {
+    const { id } = req.params;
+    const subCat  = await SubCategory.find({category: id}); 
+    res
+      .status(200)
+      .json({ data : subCat });
+});

@@ -12,6 +12,7 @@ const {
  getSubCategories,
  getSubCategory,
  updateSubCategory,
+ getSubByCat
 } = require('../services/subCategoryService');
 
 const router = express.Router();
@@ -25,6 +26,10 @@ router
   .get(getSubCategory )
   .put(updateSubCategory)
   .delete(deleteSubCategory);
+
+  router
+  .route('/category/:id')
+  .get(getSubByCat )
 
 
 module.exports = router;
