@@ -66,3 +66,26 @@ exports.getAll = (Model, modelName = '') =>
       .status(200)
       .json({ results: documents.length, paginationResult, data: documents });
   });
+
+  exports.getAllOnce = (Model, modelName = '') =>
+  asyncHandler(async (req, res) => {
+    let filter = {};
+    if (req.filterObj) {
+      filter = req.filterObj;
+    }
+    // Build query
+    const apiFeatures = new ApiFeatures(Model.find(filter), req.query)
+      .paginate()
+      .filter()
+      .search(modelName)
+      .limitFields()
+      .sort();
+
+    // Execute query
+    const { mongooseQuery } = apiFeatures;
+    const documents = await mongooseQuery;
+
+    res
+      .status(200)
+      .json({ results: documents.length,  data: documents });
+  });

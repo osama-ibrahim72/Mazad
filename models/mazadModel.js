@@ -42,15 +42,6 @@ const mazadSchema = new mongoose.Schema(
       required: [true, 'Product must be belong to category'],
 
     },
-    ratingsAverage: {
-      type: Number,
-      min: [1, 'Rating must be above or equal 1.0'],
-      max: [5, 'Rating must be below or equal 5.0'],
-    },
-    ratingsQuantity: {
-      type: Number,
-      default: 0,
-    },
     status : {
       type : Boolean,
       default: true,
@@ -74,10 +65,10 @@ const mazadSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Shape',
     },
-
-    
-    
-
+    model :{
+      type: mongoose.Schema.ObjectId,
+      ref: 'ModelYear',
+    }
 
   },
   { timestamps: true }

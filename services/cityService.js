@@ -9,7 +9,7 @@ const City = require('../models/cityModel');
 // @desc    Get list of categories
 // @route   GET /api/v1/categories
 // @access  Public
-exports.getCities = factory.getAll(City);
+exports.getCities = factory.getAllOnce(City);
 
 // @desc    Get specific category by id
 // @route   GET /api/v1/categories/:id

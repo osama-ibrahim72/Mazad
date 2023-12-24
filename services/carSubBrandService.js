@@ -3,13 +3,15 @@ const asyncHandler = require('express-async-handler');
 const factory = require('./handlersFactory');
 const { uploadSingleImage } = require('../middlewares/uploadImageMiddleware');
 const CarSubBrand = require('../models/carSubBrandModel');
+const CarBrand = require('../models/carBrandModel');
+
 
 
 
 // @desc    Get list of CarSubBrands
 // @route   GET /api/v1/CarSubBrands
 // @access  Public
-exports.getCarSubBrands = factory.getAll(CarSubBrand);
+exports.getCarSubBrands = factory.getAllOnce(CarSubBrand);
 
 // @desc    Get specific category by id
 // @route   GET /api/v1/CarSubBrands/:id
@@ -31,3 +33,10 @@ exports.updateCarSubBrand = factory.updateOne(CarSubBrand);
 // @access  Private
 exports.deleteCarSubBrand = factory.deleteOne(CarSubBrand);
 
+exports.getSubBrandByBrand = asyncHandler(async (req,res) => {
+    const { id } = req.params;
+    const carSubBrand  = await CarSubBrand.find({carBrand: id}); 
+    res
+      .status(200)
+      .json({ data : carSubBrand });
+});

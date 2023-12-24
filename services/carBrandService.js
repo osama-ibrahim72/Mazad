@@ -9,7 +9,7 @@ const CarBrand = require('../models/carBrandModel');
 // @desc    Get list of CarBrands
 // @route   GET /api/v1/CarBrands
 // @access  Public
-exports.getCarBrands = factory.getAll(CarBrand);
+exports.getCarBrands = factory.getAllOnce(CarBrand);
 
 // @desc    Get specific category by id
 // @route   GET /api/v1/CarBrands/:id

@@ -17,10 +17,13 @@ const authRoute = require('./routes/authRoute');
 const categoriesRoute = require('./routes/categoryRoute');
 const subCategoriesRoute = require('./routes/subCategoryRoute');
 const carBrandRoute = require('./routes/carBrandRoute');
+const carSubBrandRoute = require('./routes/carSubBrandRoute');
 const shapeRoute = require('./routes/shapeRoute');
 const mazadRoute = require('./routes/mazadRoute');
 const areaRoute = require('./routes/areaRoute');
 const cityRoute = require('./routes/cityRoute');
+const modelYearRoute = require('./routes/modelYearRoute');
+
 
 
 
@@ -49,10 +52,14 @@ app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/categories', categoriesRoute);
 app.use('/api/v1/subCategories', subCategoriesRoute);
 app.use('/api/v1/carBrands', carBrandRoute);
+app.use('/api/v1/carSubBrands', carSubBrandRoute);
 app.use('/api/v1/shapes', shapeRoute);
 app.use('/api/v1/mazad', mazadRoute);
 app.use('/api/v1/area', areaRoute);
 app.use('/api/v1/city', cityRoute);
+app.use('/api/v1/models', modelYearRoute);
+
+
 
 
 

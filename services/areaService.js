@@ -9,7 +9,7 @@ const Area = require('../models/areaModel');
 // @desc    Get list of categories
 // @route   GET /api/v1/categories
 // @access  Public
-exports.getAreas = factory.getAll(Area);
+exports.getAreas = factory.getAllOnce(Area);
 
 // @desc    Get specific category by id
 // @route   GET /api/v1/categories/:id

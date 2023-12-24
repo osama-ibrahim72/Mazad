@@ -9,7 +9,7 @@ const Shape = require('../models/shapeModel');
 // @desc    Get list of Shapes
 // @route   GET /api/v1/Shapes
 // @access  Public
-exports.getShapes = factory.getAll(Shape);
+exports.getShapes = factory.getAllOnce(Shape);
 
 // @desc    Get specific Shape by id
 // @route   GET /api/v1/Shapes/:id
