@@ -17,7 +17,7 @@ const mazadSchema = new mongoose.Schema(
       required: [true, 'Product price is required'],
       trim: true,
     },
-    priceAfterDiscount: {
+    numberOfDays: {
       type: Number,
     },
     bestoffer:{
