@@ -68,6 +68,24 @@ const mazadSchema = new mongoose.Schema(
     model :{
       type: mongoose.Schema.ObjectId,
       ref: 'ModelYear',
+    },
+    type : {
+      type : String,
+    },
+    gaz :{
+      type : String,
+    },
+    auto :{
+      type : Boolean,
+    },
+    sell :{
+      type : Boolean,
+    },
+    walkFrom :{
+      type : Number,
+    },
+    walkTo :{
+      type : Number,
     }
 
   },
