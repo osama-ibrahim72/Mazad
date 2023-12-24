@@ -86,6 +86,9 @@ const mazadSchema = new mongoose.Schema(
     },
     walkTo :{
       type : Number,
+    },
+    return :{
+      type :Boolean,
     }
 
   },
