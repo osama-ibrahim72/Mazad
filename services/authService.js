@@ -64,15 +64,11 @@ exports.protect = asyncHandler(async (req, res, next) => {
   // 3) Check if user exists
   const currentUser = await User.findById(decoded.userId);
   if (!currentUser) {
-    return next(
-      new ApiError(
-        'The user that belong to this token does no longer exist',
-        401
-      )
-    );
+    res.status(401).json({ error: 'The user that belong to this token does no longer exist'});
   }
-
-  res.status(200).json({ data: currentUser, token });
+  else{
+    res.status(200).json({ data: currentUser, token });
+  }
 });
 
 
@@ -141,6 +137,8 @@ exports.getOTP = asyncHandler(async (req, res, next) =>{
       );
     }
     const otp = req.body.otp;
+    console.log(otp);
+    console.log(currentUser.otp);
     if(otp == currentUser.otp){
       currentUser.active =true;
       await currentUser.save();

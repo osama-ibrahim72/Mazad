@@ -65,4 +65,8 @@ exports.home = asyncHandler (async (req, res) => {
       .json({ results: documents.length, paginationResult, data: documents });
 });
 
-
+exports.mazadPhotos = asyncHandler (async (req, res) =>{
+  const { id } = req.params;
+  const photos = await Mazad.findById(id , 'imageCover images');
+  res.status(200).json({data : photos});
+})
