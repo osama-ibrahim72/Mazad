@@ -49,7 +49,7 @@ exports.home = asyncHandler (async (req, res) => {
       filter = req.filterObj;
     }
     const documentsCounts = await Mazad.countDocuments();
-    const apiFeatures = new ApiFeatures(Mazad.find(filter), req.query)
+    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar').populate({ path: 'user', select: '_id profileImg' }), req.query)
       .paginate(documentsCounts)
       .filter()
       .search(Mazad)
