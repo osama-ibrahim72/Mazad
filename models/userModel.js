@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
     passwordResetVerified: Boolean,
     otp:{
-      type : Number,
+      type : String,
     },
     active: {
       type: Boolean,
