@@ -39,7 +39,7 @@ const mazadSchema = new mongoose.Schema(
     category: {
       type: mongoose.Schema.ObjectId,
       ref: 'Category',
-      required: [true, 'Product must be belong to category'],
+      //required: [true, 'Product must be belong to category'],
 
     },
     status : {
