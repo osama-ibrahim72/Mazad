@@ -49,7 +49,7 @@ exports.home = asyncHandler (async (req, res) => {
       filter = req.filterObj;
     }
     const documentsCounts = await Mazad.countDocuments();
-    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar').populate({ path: 'user', select: '_id profileImg' }), req.query)
+    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar').populate({ path: 'user', select: '_id name area' }), req.query)
       .paginate(documentsCounts)
       .filter()
       .search(Mazad)
@@ -58,8 +58,9 @@ exports.home = asyncHandler (async (req, res) => {
 
     // Execute query
     const { mongooseQuery, paginationResult } = apiFeatures;
-    const documents = await mongooseQuery;
+    var documents = await mongooseQuery;
 
+   
     res
       .status(200)
       .json({ results: documents.length, paginationResult, data: documents });
@@ -69,4 +70,10 @@ exports.mazadPhotos = asyncHandler (async (req, res) =>{
   const { id } = req.params;
   const photos = await Mazad.findById(id , 'imageCover images');
   res.status(200).json({data : photos});
-})
+});
+
+exports.mazadProfile = asyncHandler (async (req, res) =>{
+  const { id } = req.params;
+  const photos = await Mazad.findById(id , 'user').populate({ path: 'user', select: 'profileImg' });
+  res.status(200).json({data : photos});
+});

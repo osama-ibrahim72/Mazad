@@ -12,6 +12,8 @@ const {
   createMazad,
   getMazad,
   getMazadat,
+  mazadPhotos,
+  mazadProfile,
 } = require('../services/mazadService');
 
 const router = express.Router();
@@ -25,6 +27,14 @@ router
   .get(home);
   
 
+router
+  .route('/photos/:id')
+  .get(mazadPhotos);
+  
+  router
+  .route('/profile/:id')
+  .get(mazadProfile);
+  
 
 
 module.exports = router;
