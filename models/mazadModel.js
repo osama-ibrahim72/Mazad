@@ -96,7 +96,8 @@ const mazadSchema = new mongoose.Schema(
     winner :{
       type: mongoose.Schema.ObjectId,
       ref :'User'
-    }
+    },
+    cancel : Boolean,
 
   },
   { timestamps: true }
