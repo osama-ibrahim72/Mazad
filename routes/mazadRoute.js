@@ -14,6 +14,7 @@ const {
   getMazadat,
   mazadPhotos,
   mazadProfile,
+  mazadDate,
 } = require('../services/mazadService');
 
 const router = express.Router();
@@ -24,7 +25,7 @@ router
 
 router
   .route('/home')
-  .get(home);
+  .get(/*mazadDate*/ home);
   
 
 router

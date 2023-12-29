@@ -43,8 +43,8 @@ const mazadSchema = new mongoose.Schema(
 
     },
     status : {
-      type : Boolean,
-      default: true,
+      type : Number,
+      default: 0,
     },
     isCar : {
       type :Boolean,
@@ -89,6 +89,13 @@ const mazadSchema = new mongoose.Schema(
     },
     return :{
       type :Boolean,
+    },
+    remainingDate :{
+      type : Date,
+    },
+    winner :{
+      type: mongoose.Schema.ObjectId,
+      ref :'User'
     }
 
   },

@@ -44,12 +44,29 @@ exports.joinAuuction = asyncHandler (async (req, res) => {
 
 
 exports.home = asyncHandler (async (req, res) => {
+  const mazadat = await Mazad.find(); 
+  // Create a new Date object
+  var currentDate = new Date();
+  mazadat.forEach(item=>{
+    var finalDate = new Date(item.time);
+    finalDate.setDate(item.time + item.numberOfDays);
+
+    if(finalDate > currentDate && item.time > currentDate){
+      item.remainingDate = finalDate - currentDate; 
+      item.status = 1; 
+    
+    }
+    else if (finalDate < currentDate){
+      item.status =2; 
+    }
+    item.save();
+  })
     let filter = {};
     if (req.filterObj) {
       filter = req.filterObj;
     }
     const documentsCounts = await Mazad.countDocuments();
-    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar').populate({ path: 'user', select: '_id name area' }), req.query)
+    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate').populate({ path: 'user', select: '_id name area' }), req.query)
       .paginate(documentsCounts)
       .filter()
       .search(Mazad)
@@ -76,4 +93,29 @@ exports.mazadProfile = asyncHandler (async (req, res) =>{
   const { id } = req.params;
   const photos = await Mazad.findById(id , 'user').populate({ path: 'user', select: 'profileImg' });
   res.status(200).json({data : photos});
+});
+
+
+
+exports.mazadDate = asyncHandler (async (req, res , next) =>{
+  const mazadat = await Mazad.find(); 
+  // Create a new Date object
+  var currentDate = new Date();
+  mazadat.forEach(item=>{
+    var finalDate = new Date(item.time);
+    finalDate.setDate(item.time + item.numberOfDays);
+
+    if(finalDate > currentDate && item.time > currentDate){
+      item.remainingDate = finalDate - currentDate; 
+      item.status = 1; 
+    
+    }
+    else if (finalDate < currentDate){
+      item.status =2; 
+    }
+    item.save();
+  })
+  next(home);
+
+
 });
