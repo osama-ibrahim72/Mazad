@@ -66,7 +66,7 @@ exports.home = asyncHandler (async (req, res) => {
       filter = req.filterObj;
     }
     const documentsCounts = await Mazad.countDocuments();
-    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate').populate({ path: 'user', select: '_id name area' }), req.query)
+    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate').populate({ path: 'user', select: '_id name area city' }), req.query)
       .paginate(documentsCounts)
       .filter()
       .search(Mazad)
