@@ -15,6 +15,8 @@ const {
   mazadPhotos,
   mazadProfile,
   mazadDate,
+  coomingSoon,
+  expired,
 } = require('../services/mazadService');
 
 const router = express.Router();
@@ -35,6 +37,9 @@ router
   router
   .route('/profile/:id')
   .get(mazadProfile);
+router.route('/coomingSoon').get(coomingSoon);
+router.route('/expired').get(expired);
+
   
 
 

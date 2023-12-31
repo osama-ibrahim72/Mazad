@@ -121,3 +121,51 @@ exports.mazadDate = asyncHandler (async (req, res , next) =>{
 
 
 });
+
+
+
+exports.coomingSoon = asyncHandler (async (req, res) => {
+    let filter = {stuts : 0};
+    if (req.filterObj) {
+      filter = req.filterObj;
+    }
+    const documentsCounts = await Mazad.countDocuments();
+    const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate description user category carBrand carSubBrand subCategory shape model winner cancel').populate('model shape subCategory category carSubBrand carBrand').populate({ path: 'user', select: '_id name area city' }).populate({ path: 'winner', select: '_id name' }), req.query)
+      .paginate(documentsCounts)
+      .filter()
+      .search(Mazad)
+      .limitFields()
+      .sort();
+
+    // Execute query
+    const { mongooseQuery, paginationResult } = apiFeatures;
+    var documents = await mongooseQuery;
+
+   
+    res
+      .status(200)
+      .json({ results: documents.length, paginationResult, data: documents });
+});
+
+exports.expired = asyncHandler (async (req, res) => {
+  let filter = {stuts : 2};
+  if (req.filterObj) {
+    filter = req.filterObj;
+  }
+  const documentsCounts = await Mazad.countDocuments();
+  const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate description user category carBrand carSubBrand subCategory shape model winner cancel').populate('model shape subCategory category carSubBrand carBrand').populate({ path: 'user', select: '_id name area city' }).populate({ path: 'winner', select: '_id name' }), req.query)
+    .paginate(documentsCounts)
+    .filter()
+    .search(Mazad)
+    .limitFields()
+    .sort();
+
+  // Execute query
+  const { mongooseQuery, paginationResult } = apiFeatures;
+  var documents = await mongooseQuery;
+
+ 
+  res
+    .status(200)
+    .json({ results: documents.length, paginationResult, data: documents });
+});

@@ -25,6 +25,8 @@ const cityRoute = require('./routes/cityRoute');
 const modelYearRoute = require('./routes/modelYearRoute');
 const walletRoute = require('./routes/walletRoute');
 const paymenttRoute = require('./routes/paymentRoute');
+const favouriteRoute = require('./routes/favouriteRoute');
+
 
 
 
@@ -63,6 +65,8 @@ app.use('/api/v1/city', cityRoute);
 app.use('/api/v1/models', modelYearRoute);
 app.use('/api/v1/wallet', walletRoute);
 app.use('/api/v1/payment', paymenttRoute);
+app.use('/api/v1/favourite', favouriteRoute);
+
 
 
 

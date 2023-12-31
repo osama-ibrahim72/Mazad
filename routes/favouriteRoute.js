@@ -7,25 +7,20 @@ const express = require('express');
 // } = require('../utils/validators/categoryValidator');
 
 const {
-  getCarBrands,
-  createCarBrand,
-  deleteCarBrand,
-  updateCarBrand,
-  getCarBrand,
-  
-} = require('../services/carBrandService');
+  getFavourite,
+  addMazad,
+  deleteMazad,
+} = require('../services/favouriteService');
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(getCarBrands)
-  .post( createCarBrand  );
+  .post( addMazad);
 router
   .route('/:id')
-  .get( getCarBrand)
-  .put( updateCarBrand)
-  .delete( deleteCarBrand);
+  .get( getFavourite )
+  .delete( deleteMazad );
 
 
 module.exports = router;
