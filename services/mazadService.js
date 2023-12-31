@@ -44,7 +44,7 @@ exports.joinAuuction = asyncHandler (async (req, res) => {
 
 
 exports.home = asyncHandler (async (req, res) => {
-  const mazadat = await Mazad.find(); 
+  const mazadat = await Mazad.find({}); 
   // Create a new Date object
   var currentDate = new Date();
   mazadat.forEach(item=>{
@@ -54,6 +54,8 @@ exports.home = asyncHandler (async (req, res) => {
     if(finalDate > currentDate && item.time > currentDate){
       item.remainingDate = finalDate - currentDate; 
       item.status = 1; 
+      console.log(item.remainingDate);
+      item.save();
     
     }
     else if (finalDate < currentDate){
@@ -61,7 +63,7 @@ exports.home = asyncHandler (async (req, res) => {
     }
     item.save();
   })
-    let filter = {};
+    let filter = {stuts : 1};
     if (req.filterObj) {
       filter = req.filterObj;
     }
