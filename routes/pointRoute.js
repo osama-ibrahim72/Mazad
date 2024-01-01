@@ -8,15 +8,15 @@ const express = require('express');
 
 const {
   getPoint,
-  updatePoint,
+  //updatePoint,
 } = require('../services/pointService');
 
 const router = express.Router();
 
 router
   .route('/:id')
-  .get(getPoint)
-  .put(updatePoint)
+  .get(getPoint);
+  //.put(updatePoint)
   
 
 module.exports = router;

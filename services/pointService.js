@@ -1,21 +1,19 @@
-const sharp = require('sharp');
-const { v4: uuidv4 } = require('uuid');
 const asyncHandler = require('express-async-handler');
 
 const factory = require('./handlersFactory');
-const { uploadSingleImage } = require('../middlewares/uploadImageMiddleware');
-const Point = require('../models/pointModel');
+const User = require('../models/userModel');
+
 
 
 
 
 exports.getPoint = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const point = await Point.findOne({seller :id});
+    const point = await User.findById(id);
     if (point) {
-        res.status(200).json({data : point});
+        res.status(200).json({data : point.point});
     } else {
-        res.status(404);
+        res.status(500);
     }
 })
 

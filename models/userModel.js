@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema(
     },
     city:{
       type : String,
+    },
+    point:{
+      type: Number,
+      default : 0,
     }
   },
   { timestamps: true }

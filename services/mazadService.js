@@ -5,6 +5,9 @@ const asyncHandler = require('express-async-handler');
 const factory = require('./handlersFactory');
 const { uploadSingleImage } = require('../middlewares/uploadImageMiddleware');
 const Mazad = require('../models/mazadModel');
+const User = require('../models/userModel');
+const AppCotroller = require('../models/appControllerModel');
+const MazadJoined = require('../models/mazadJoinedModel');
 
 
 const ApiFeatures = require('../utils/apiFeatures');
@@ -18,7 +21,21 @@ const ApiFeatures = require('../utils/apiFeatures');
 exports.getMazadat = factory.getAll(Mazad);
 
 exports.addOffer = asyncHandler(async(req,res)=>{
-
+  const user = await User.findById(req.body.user);
+  const mazad = await Mazad.findById(req.body.mazad);
+  const control = await AppCotroller.findById({git:75});
+  const offer = req.body.offer;
+  if(mazad.bestoffer < offer){
+    const lastUser = await User.findById(mazad.winner);
+    await MazadJoined.create({user : user , mazad : mazad});
+    lastUser.credit = lastUser.credit + control.commission;
+    lastUser.save();
+    mazad.bestoffer = offer;
+    mazad.winner = user;
+    mazad.save();
+    user.credit = user.credit - control.commission;
+  }
+  res.status(200);
 });
   
 
@@ -37,8 +54,28 @@ exports.createMazad = factory.createOne(Mazad);
 
 
 
-exports.joinAuuction = asyncHandler (async (req, res) => {
-  
+exports.joinedMazad = asyncHandler (async (req, res) => {
+  const { id } = req.params;
+  let filter = {};
+  if (req.filterObj) {
+    filter = req.filterObj;
+  }
+  const documentsCounts = await Mazad.countDocuments();
+  const apiFeatures = new ApiFeatures(MazadJoined.findById({user : id}).populate({ path: 'user', select:'title price _id numberOfDays bestoffer time category status isCar remainingDate description user category carBrand carSubBrand subCategory shape model winner cancel'}), req.query)
+    .paginate(documentsCounts)
+    .filter()
+    .search(Mazad)
+    .limitFields()
+    .sort();
+
+  // Execute query
+  const { mongooseQuery, paginationResult } = apiFeatures;
+  var documents = await mongooseQuery;
+
+ 
+  res
+    .status(200)
+    .json({ results: documents.length, paginationResult, data: documents });
 });
 
 
@@ -148,7 +185,31 @@ exports.coomingSoon = asyncHandler (async (req, res) => {
 });
 
 exports.expired = asyncHandler (async (req, res) => {
-  let filter = {stuts : 2};
+  let filter = {status : 2};
+  if (req.filterObj) {
+    filter = req.filterObj;
+  }
+  const documentsCounts = await Mazad.countDocuments();
+  const apiFeatures = new ApiFeatures(Mazad.find(filter , 'title price _id numberOfDays bestoffer time category status isCar remainingDate description user category carBrand carSubBrand subCategory shape model winner cancel').populate('model shape subCategory category carSubBrand carBrand').populate({ path: 'user', select: '_id name area city' }).populate({ path: 'winner', select: '_id name' }), req.query)
+    .paginate(documentsCounts)
+    .filter()
+    .search(Mazad)
+    .limitFields()
+    .sort();
+
+  // Execute query
+  const { mongooseQuery, paginationResult } = apiFeatures;
+  var documents = await mongooseQuery;
+
+ 
+  res
+    .status(200)
+    .json({ results: documents.length, paginationResult, data: documents });
+});
+
+
+exports.running = asyncHandler (async (req, res) => {
+  let filter = {status : 2};
   if (req.filterObj) {
     filter = req.filterObj;
   }

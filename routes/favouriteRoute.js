@@ -10,6 +10,7 @@ const {
   getFavourite,
   addMazad,
   deleteMazad,
+  
 } = require('../services/favouriteService');
 
 const router = express.Router();

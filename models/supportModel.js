@@ -6,14 +6,13 @@ const supportSchema = new mongoose.Schema(
         type : mongoose.Types.ObjectId,
         ref : 'User',
       },
-      seller:{
-        type : mongoose.Types.ObjectId,
-        ref : 'Seller',
-      },
       title : {
         type : String,
       },
       description : {
+        type : String,
+      },
+      replay:{
         type : String,
       }
     },

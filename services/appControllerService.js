@@ -16,7 +16,7 @@ exports.getTerms = asyncHandler(async (req, res) =>{
 
 exports.getPrivacy = asyncHandler(async (req, res) =>{
     const controller = await AppCotroller.findOne({git:75});
-    res.status(200).json({"terms": controller.privacyUser});
+    res.status(200).json({data: controller.privacyUser});
 });
 
 
@@ -29,7 +29,7 @@ exports.updateTerms = asyncHandler(async (req, res)=>{
 });
 
 exports.updatePrivacy = asyncHandler(async (req, res)=>{
-    const privacy = req.body.privacyUser;
+    const privacy = req.body.privacy;
     const controller = await AppCotroller.findOne({git:75});
     controller.privacyUser = privacy;
     controller.save();

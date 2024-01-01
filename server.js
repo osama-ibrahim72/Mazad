@@ -26,6 +26,11 @@ const modelYearRoute = require('./routes/modelYearRoute');
 const walletRoute = require('./routes/walletRoute');
 const paymenttRoute = require('./routes/paymentRoute');
 const favouriteRoute = require('./routes/favouriteRoute');
+const pointRoute = require('./routes/pointRoute');
+const controlRoute = require('./routes/appControllerRoute');
+const supportRoute = require('./routes/supportRoute');
+
+
 
 
 
@@ -66,6 +71,12 @@ app.use('/api/v1/models', modelYearRoute);
 app.use('/api/v1/wallet', walletRoute);
 app.use('/api/v1/payment', paymenttRoute);
 app.use('/api/v1/favourite', favouriteRoute);
+app.use('/api/v1/point', pointRoute);
+app.use('/api/v1/crontrol', controlRoute);
+app.use('/api/v1/support', supportRoute);
+
+
+
 
 
 

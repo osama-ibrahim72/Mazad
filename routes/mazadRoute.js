@@ -17,6 +17,9 @@ const {
   mazadDate,
   coomingSoon,
   expired,
+  addOffer,
+  joinedMazad,
+  running,
 } = require('../services/mazadService');
 
 const router = express.Router();
@@ -39,6 +42,11 @@ router
   .get(mazadProfile);
 router.route('/coomingSoon').get(coomingSoon);
 router.route('/expired').get(expired);
+router.route('/created').get(expired);
+router.route('/Offer').post(addOffer);
+router.route('/joined/:id').get(joinedMazad);
+
+
 
   
 

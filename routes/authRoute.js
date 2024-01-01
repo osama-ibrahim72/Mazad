@@ -17,6 +17,7 @@ const {
   getOTP,
   changePassword,
   protect,
+  update,
 } = require('../services/authService');
 
 const router = express.Router();
@@ -30,6 +31,8 @@ router.post('/verifyResetCode', verifyPassResetCode);
 router.put('/resetPassword', resetPassword);
 router.put('/changePassword', changePassword);
 router.put('/protect', protect);
+router.put('/update', update);
+
 
 
 

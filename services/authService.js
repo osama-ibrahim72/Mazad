@@ -2,6 +2,8 @@ const crypto = require('crypto');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const factory = require('./handlersFactory');
+
 
 const asyncHandler = require('express-async-handler');
 const ApiError = require('../utils/apiError');
@@ -236,7 +238,7 @@ exports.changePassword = asyncHandler (async (req,res)=>{
   else 
     res.status(500).json({});
 });
-
+exports.update = factory.updateOne(User);
 // // @desc    Forgot password
 // // @route   POST /api/v1/auth/forgotPassword
 // // @access  Public

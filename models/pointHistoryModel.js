@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 
 const pointHistorySchema = new mongoose.Schema(
   {
-    seller :{
+    user :{
       type: mongoose.Schema.ObjectId,
-      ref: 'Seller',
+      ref: 'User',
       unique: true,
-      required: [true, 'ptonts must be belong to seller'],
     },
     dis:{
         type : String,
