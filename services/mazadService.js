@@ -84,23 +84,36 @@ exports.home = asyncHandler (async (req, res) => {
   const mazadat = await Mazad.find({}); 
   // Create a new Date object
   var currentDate = new Date();
+  console.log(currentDate);
   mazadat.forEach(item=>{
+    
     var finalDate = new Date(item.time);
     finalDate.setDate(item.time + item.numberOfDays);
-
-    if(finalDate > currentDate && item.time > currentDate){
-      item.remainingDate = finalDate - currentDate; 
-      item.status = 1; 
-      console.log(item.remainingDate);
+    console.log(finalDate);
+    if(item.status == 0 && item.time > currentDate){
+      item.status = 1;
       item.save();
+      console.log(item.status);
+    }
+    else if (item.status == 1 && currentDate > finalDate){
+      item.status = 2;
+      item.save();
+      console.log(item.status);
+    }
+
+    // if(finalDate > currentDate && item.time > currentDate){
+    //   item.remainingDate = finalDate - currentDate; 
+    //   item.status = 1; 
+    //   console.log(item.remainingDate);
+    //   item.save();
     
-    }
-    else if (finalDate < currentDate){
-      item.status =2; 
-    }
-    item.save();
+    // }
+    // else if (finalDate < currentDate){
+    //   item.status =2; 
+    // }
+    // item.save();
   })
-    let filter = {stuts : 1};
+    let filter = {status : 1};
     if (req.filterObj) {
       filter = req.filterObj;
     }
